@@ -14,8 +14,8 @@ pthread%: CC := cc -pthread
 	$(CC) -O2 -fPIC $^ -o $@
 
 %.so.exe: var-%.c var-main.o
-	$(CC) -O2 -shared -fPIC $< -o $*.so
-	$(CC) -L. var-main.o -l:$*.so -o $@
+	$(CC) -O2 -shared -fPIC $< -o lib$*.so
+	$(CC) -L. var-main.o -l$* -o $@
 
 BENCHMARKS = \
   global.exe global.pic.exe global.so.exe \
@@ -29,4 +29,4 @@ benchmark: $(BENCHMARKS)
 	done
 
 clean:
-	rm -f *.exe *.o *.so
+	rm -f *.exe *.o *.so *~
